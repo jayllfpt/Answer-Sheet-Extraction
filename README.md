@@ -4,7 +4,7 @@ Vietnamese High School Graduation Examination Answer Extraction using openCV-pyt
 # Installation & Run
 1. Clone repository
 2. Run ```pip install -r requirements.txt```
-3. Fix the image path in ```main.py```
+3. Change the image path in ```config.yml```
 4. Run ```python main.py```
 
 # Notes

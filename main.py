@@ -2,13 +2,7 @@ import imutils
 import numpy as np
 import cv2
 from math import ceil
-
-# Constant
-ANSWER = ['A', 'B', 'C', 'D']
-AREA_BOX = 100000
-CHECK_XY = 20000
-IMAGE_PATH = r"img\paper01.jpg"
-PIXEL_THRESHOLD = 150
+import yaml
 
 def get_x(s):
     return s[1][0]
@@ -137,9 +131,18 @@ def process_list_ans(list_answers):
     return list_choices
     
 
+
+with open('config.yaml', 'r') as file:
+    config = yaml.safe_load(file)
+    IMAGE_PATH = config['IMAGE_PATH']
+    AREA_BOX = config['AREA_BOX']
+    CHECK_XY = config['CHECK_XY']
+    ANSWER = config['ANSWER']
+    PIXEL_THRESHOLD = config['PIXEL_THRESHOLD']
+
+
 if __name__ == '__main__':
     img = cv2.imread(IMAGE_PATH)
-    # img = cv2.imread(r"Auto-Scores-National-Multiple-Choice-Test\test1.jpg")
     list_ans_boxes = crop_image(img)
     list_ans = process_ans_blocks(list_ans_boxes)
     list_ans = process_list_ans(list_ans)
