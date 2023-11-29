@@ -7,5 +7,8 @@ Vietnamese High School Graduation Examination Answer Extraction using openCV-pyt
 3. Change the image path in ```config.yml```
 4. Run ```python main.py```
 
+# Screenshot
+![screenshot](Screenshot.png)
+
 # Notes
 Highly recommend using conda/miniconda for avoiding evironments conflicts.
