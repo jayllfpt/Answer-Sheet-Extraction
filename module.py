@@ -114,23 +114,24 @@ def process_list_ans(list_answers):
     list_choices = []
     offset = 44
     start = 32
-
+    result = {}
     for id, answer_img in enumerate(list_answers):
+        result[id+1] = []
         for i in range(4):
             bubble_choice = answer_img[:, start + i * offset:start + (i + 1) * offset]
             bubble_choice = cv2.threshold(bubble_choice, 0, 255, cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)[1]
             bubble_choice = bubble_choice[:,0:-5]
             if cv2.countNonZero(bubble_choice) > PIXEL_THRESHOLD:
                 # print(id, i, cv2.countNonZero(bubble_choice))
-                print(id+1, ANSWER[i])
+                # print(id+1, ANSWER[i])
+                result[id+1].append(ANSWER[i])
             # cv2.imwrite(f"result/{id+1}_{i+1}.png", bubble_choice)
             list_choices.append(bubble_choice)
 
     if len(list_choices) != 480:
         raise ValueError("Length of list_choices must be 480")
-    return list_choices
+    return list_choices, result
     
-
 
 with open('config.yaml', 'r') as file:
     config = yaml.safe_load(file)
