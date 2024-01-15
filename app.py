@@ -6,6 +6,9 @@ import base64
 
 
 app = Flask(__name__)
+@app.route("/")
+def home():
+    return "Welcome to Vietnamese Answer Sheet Extraction"
 
 @app.route('/answer', methods=['POST'])
 def get_image_size():
@@ -36,7 +39,7 @@ def get_image_size():
         _, img_encoded = cv2.imencode('.png', image)
         img_base64 = base64.b64encode(img_encoded.tobytes()).decode('utf-8')
 
-        return jsonify({"image": img_base64, "result": result})
+        return jsonify({"result": result})
     except Exception as e:
         return jsonify({'error': f'Error processing image: {str(e)}'}), 500
 
